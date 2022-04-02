@@ -2,6 +2,7 @@ import random
 
 height = 1200
 width = 675
+max_square = 400
 
 ul_list = [] # upper left points list
 ans_list = [] # [[x,y,l], ...]
@@ -22,14 +23,14 @@ def calc_square():
                     i = counter
             counter += 1
         
-        # upper left point in this loop
+        # (p_x, p_y): upper left point in this loop
         p_x = min_x
         p_y = min_y
-        del ul_list[i] # remove point p from ul_list
+        del ul_list[counter] # remove point p from ul_list
         print(p_x, p_y)
 
         max_l = min(width - p_x, height - p_y) # TODO consider the case of stick out
-        length = random.randint(5, max_l)  # TODO when margin is less than 5
+        length = random.randint(5, min(max_l, max_square))  # TODO when margin is less than 5
         ans_list.append([p_x, p_y, length])
 
         # append new ul to ul_list
