@@ -26,7 +26,7 @@ def calc_square():
         # (p_x, p_y): upper left point in this loop
         p_x = min_x
         p_y = min_y
-        del ul_list[counter] # remove point p from ul_list
+        del ul_list[counter - 1] # remove point p from ul_list
         print(p_x, p_y)
 
         max_l = min(width - p_x, height - p_y) # TODO consider the case of stick out
@@ -39,7 +39,7 @@ def calc_square():
         if p_y + length < height: # TODO consider the case of stick out
             ul_list.append([p_x, p_y + length + 1])
 
-        print(ul_list.len())
+        print(len(ul_list))
         print('\n')
 
         if len(ul_list) == 0:
