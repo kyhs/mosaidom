@@ -31,7 +31,11 @@ def calc_square():
 
         max_l = min(width - p_x, height - p_y) # TODO consider the case of stick out
         length = random.randint(5, min(max_l, max_square))  # TODO when margin is less than 5
-        ans_list.append([p_x, p_y, length])
+        print(length)
+        if length < 5:
+            continue # TODO consider when 0 < lenght < 5 
+        else:
+            ans_list.append([p_x, p_y, length])
 
         # append new ul to ul_list
         if p_x + length < width: # TODO consider the case of stick out
@@ -39,8 +43,9 @@ def calc_square():
         if p_y + length < height: # TODO consider the case of stick out
             ul_list.append([p_x, p_y + length + 1])
 
+        # print(ul_list)
         print(len(ul_list))
-        print('\n')
+        # print('\n')
 
         if len(ul_list) == 0:
             break
