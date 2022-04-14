@@ -37,6 +37,10 @@ def calc_square():
         p_x = min_x
         p_y = min_y
         # print('i:', i, ', counter:', counter)
+        if len(ul_list) <= i:
+            print("out of index")
+            print(ul_list)
+            sys.exit()
         del ul_list[i] # remove point p from ul_list
         print('p:', p_x, p_y)
         
@@ -49,7 +53,7 @@ def calc_square():
                     # p_x is on the other square's edge TODO
                     print("suit")
                     flg_suit = True
-                elif ans_ul_point[0] <= p_x <= ans_ul_point[0] + ans_ul_point[2] and ans_ul_point[1] <= p_y <= ans_ul_point[1] + ans_ul_point[2]:
+                elif ans_ul_point[0] < p_x < ans_ul_point[0] + ans_ul_point[2] and ans_ul_point[1] < p_y < ans_ul_point[1] + ans_ul_point[2]:
                     print("overlap")
                     flg_suit = True
         if flg_suit:
@@ -72,9 +76,12 @@ def calc_square():
 
         # append new ul to ul_list
         if p_x + length < width: # TODO consider the case of stick out
-            ul_list.append([p_x + length + 1, p_y])
+            print("a")
+            ul_list.append([p_x + length, p_y])
         if p_y + length < height: # TODO consider the case of stick out
-            ul_list.append([p_x, p_y + length + 1])
+            print("b")
+            ul_list.append([p_x, p_y + length])
+        
 
         # print(ul_list)
         # print(len(ul_list))
@@ -108,12 +115,12 @@ def draw_square():
     # im = Image.fromarray(np_color_list)
     # im.save('sample.png')
 
-    # with open('color_list.csv', 'w') as file:
-    #     writer = csv.writer(file, lineterminator='\n')
-    #     writer.writerows(color_list)
-    # with open('ans_list.csv', 'w') as file:
-    #     writer = csv.writer(file, lineterminator='\n')
-    #     writer.writerows(ans_list)
+    with open('color_list.csv', 'w') as file:
+        writer = csv.writer(file, lineterminator='\n')
+        writer.writerows(color_list)
+    with open('ans_list.csv', 'w') as file:
+        writer = csv.writer(file, lineterminator='\n')
+        writer.writerows(ans_list)
 
     img = Image.new('RGB', (width, height), "white")
     img.putdata(list(itertools.chain.from_iterable(color_list)))
