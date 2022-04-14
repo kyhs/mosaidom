@@ -1,7 +1,10 @@
 import random
 import sys
+from turtle import color
 import numpy as np
 from PIL import Image
+import itertools
+import csv
 
 height = 1200
 width = 675
@@ -78,30 +81,40 @@ def calc_square():
         if len(ul_list) == 0:
             break
 
-        # debug
-        if len(ans_list) > 3:
-            break
+        # # debug
+        # if len(ans_list) > 10:
+        #     break
     return
 
 def draw_square():
-    color_list = [[""]*width]*height
+    # color_list = [[int('0x000000', 16)]*width]*height
+    color_list = [[int('0x000000', 16)]*width for i in range(height)]
     i = 0
     for square in ans_list:
-        for x in range(square[0], square[0] + square[2]):
-            for y in range(square[1], square[1] + square[2]):
-                color_list[y][x] = gen_color()
-        print(len(ans_list)-i)
+        # print(square)
+        color = gen_color()
+        for y in range(square[1], square[1] + square[2], 1):
+            for x in range(square[0], square[0] + square[2], 1):
+                color_list[y][x] = color
+        # print(x,y)
+        # print(len(ans_list)-i)
         i += 1
     # print(color_list)
 
-    for y in range(height):
-        for x in range(width):
-            if color_list[y][x] == "":
-                color_list[y][x] = int('0xFF0000', 16)
+    # np_color_list = np.array(color_list)
+    # im = Image.fromarray(np_color_list)
+    # im.save('sample.png')
 
-    np_color_list = np.array(color_list)
-    im = Image.fromarray(np_color_list)
-    im.save('sample.png')
+    # with open('color_list.csv', 'w') as file:
+    #     writer = csv.writer(file, lineterminator='\n')
+    #     writer.writerows(color_list)
+    # with open('ans_list.csv', 'w') as file:
+    #     writer = csv.writer(file, lineterminator='\n')
+    #     writer.writerows(ans_list)
+
+    img = Image.new('RGB', (width, height), "white")
+    img.putdata(list(itertools.chain.from_iterable(color_list)))
+    img.save('aaa.png')
 
 def gen_color():
     red = hex(random.randint(0, 255))
@@ -115,4 +128,4 @@ if __name__ == "__main__":
     # print('ans size: ', len(ans_list))
     # print(gen_color()) # debug
     draw_square()
-    print(ans_list)
+    # print(ans_list)
