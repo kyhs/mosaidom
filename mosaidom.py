@@ -49,6 +49,9 @@ def calc_square():
                     # p_x is on the other square's edge TODO
                     print("suit")
                     flg_suit = True
+                elif ans_ul_point[0] <= p_x <= ans_ul_point[0] + ans_ul_point[2] and ans_ul_point[1] <= p_y <= ans_ul_point[1] + ans_ul_point[2]:
+                    print("overlap")
+                    flg_suit = True
         if flg_suit:
             continue
 
