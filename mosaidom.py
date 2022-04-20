@@ -19,10 +19,13 @@ def calc_square():
     ul_list.append([0, 0])
 
     while True:
+        if len(ul_list) == 0:
+            print("no point in ul_list[]")
+            break
         min_x = 10000
         min_y = 10000
         counter = 0
-        i = 0
+        i = -1
         flg_suit = False
 
         for ul_point in ul_list:
@@ -39,8 +42,12 @@ def calc_square():
         # print('i:', i, ', counter:', counter)
         if len(ul_list) <= i:
             print("out of index")
-            print(ul_list)
+            print(ul_list, i)
             sys.exit()
+        if i < 0:
+            print("i is less than 0")
+            print(ul_list, i)
+            break
         del ul_list[i] # remove point p from ul_list
         print('p:', p_x, p_y)
         
@@ -63,7 +70,8 @@ def calc_square():
 
         if max_l < 5:
             print("no margin")
-            break # TODO when margin is less than 5
+            continue
+            # break # TODO when margin is less than 5
 
         length = random.randint(5, min(max_l, max_square)) 
 
@@ -81,19 +89,6 @@ def calc_square():
         if p_y + length < height: # TODO consider the case of stick out
             print("b")
             ul_list.append([p_x, p_y + length])
-        
-
-        # print(ul_list)
-        # print(len(ul_list))
-        # print('\n')
-        # print(ans_list)
-
-        if len(ul_list) == 0:
-            break
-
-        # # debug
-        # if len(ans_list) > 10:
-        #     break
     return
 
 def draw_square():
@@ -125,6 +120,7 @@ def draw_square():
     img = Image.new('RGB', (width, height), "white")
     img.putdata(list(itertools.chain.from_iterable(color_list)))
     img.save('aaa.png')
+    img.show()
 
 def gen_color():
     red = hex(random.randint(0, 255))
@@ -138,4 +134,6 @@ if __name__ == "__main__":
     # print('ans size: ', len(ans_list))
     # print(gen_color()) # debug
     draw_square()
-    # print(ans_list)
+    
+    
+    
