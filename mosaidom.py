@@ -134,6 +134,3 @@ if __name__ == "__main__":
     # print('ans size: ', len(ans_list))
     # print(gen_color()) # debug
     draw_square()
-    
-    
-    
